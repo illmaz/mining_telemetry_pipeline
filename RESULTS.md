@@ -18,7 +18,7 @@ A data engineering pipeline that ingests haul-truck telemetry from a simulated m
 
 **Proof:** 21 impossible readings caught and isolated in quarantine; none reached the production report.
 
-![Impossible tonnages caught in quarantine](portfolioproof/scenario1_impossible_tonnage.png)
+![Impossible tonnages caught in quarantine](Portfolioproof/scenario1_impossible_tonnage.png)
 
 **Insight:** validation has to be domain-aware. A valid number is not a valid tonnage. The quarantine keeps bad data visible for investigation instead of silently dropping or trusting it.
 
@@ -34,8 +34,8 @@ A data engineering pipeline that ingests haul-truck telemetry from a simulated m
 
 **Before:** gold overstated by up to 600+ tonnes per truck-shift (gold over truth). **After:** the inflation is gone; remaining gaps are only the honest hauls quarantined by Scenario 1 (gold slightly under truth).
 
-![Before: duplicates inflate totals](portfolioproof/scenario2_duplicates_before.png)
-![After: dedup removes the inflation](portfolioproof/scenario2_duplicates_after.png)
+![Before: duplicates inflate totals](Portfolioproof/scenario2_duplicates_before.png)
+![After: dedup removes the inflation](Portfolioproof/scenario2_duplicates_after.png)
 
 **Insight:** deduplication is a different operation from validation. It looks across rows, not at a row in isolation. The direction of the reconciliation gap diagnoses the failure: over means duplicates, under means dropped data.
 
@@ -63,8 +63,8 @@ A firmware update rolls out to a pilot group of trucks (the 785s), so old-format
 
 **Before:** silver contains only T01 to T04. **After:** all 8 trucks recovered.
 
-![Before: 4 of 8 trucks vanish](portfolioproof/scenario3b_rename_before.png)
-![After: all 8 trucks recovered](portfolioproof/scenario3b_rename_after.png)
+![Before: 4 of 8 trucks vanish](Portfolioproof/scenario3b_rename_before.png)
+![After: all 8 trucks recovered](Portfolioproof/scenario3b_rename_after.png)
 
 **Insight:** a rename must never auto-evolve. That just adds the new column while your logic still reads the dead one, producing silent nulls. Defend by mapping names explicitly.
 
@@ -78,8 +78,8 @@ A firmware update rolls out to a pilot group of trucks (the 785s), so old-format
 
 **Before:** T01 to T04 only. **After:** all 8 trucks recovered.
 
-![Before: 4 of 8 trucks vanish](portfolioproof/scenario3c_typechange_before.png)
-![After: all 8 trucks recovered](portfolioproof/scenario3c_typechange_after.png)
+![Before: 4 of 8 trucks vanish](Portfolioproof/scenario3c_typechange_before.png)
+![After: all 8 trucks recovered](Portfolioproof/scenario3c_typechange_after.png)
 
 **Insight:** type and format drift need defensive parsing before casting. Any unhandled schema drift silently erases data.
 
