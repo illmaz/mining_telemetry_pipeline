@@ -117,17 +117,15 @@ cause.
 
 **Insight:** type/format drift needs defensive parsing before casting. Any
 unhandled schema drift silently erases data.
->>>>>>> Stashed changes
 
 ---
 
 ## What this demonstrates
 
 - Correctness proven by reconciliation against ground truth, not assumed.
-
 - Bronze stays raw (faithful record); silver cleans; gold serves the business.
 - Each failure is handled with the *right* stance — quarantine, dedup, coalesce,
   parse, or deliberately allow — not a blanket rule.
 - The reconciliation gap is itself a diagnostic signal: its sign and size point
   at which trucks failed and how.
->>>>>>> Stashed changes
+
