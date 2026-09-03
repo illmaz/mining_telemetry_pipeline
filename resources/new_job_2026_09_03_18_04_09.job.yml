@@ -1,0 +1,65 @@
+resources:
+  jobs:
+    new_job_2026_09_03_18_04_09:
+      name: New Job 2026-09-03 18:04:09
+      tasks:
+        - task_key: Generate
+          disabled: false
+          email_notifications: {}
+          notebook_task:
+            notebook_path: ../src/01_generator.ipynb
+            source: WORKSPACE
+          run_if: ALL_SUCCESS
+          timeout_seconds: 0
+          webhook_notifications: {}
+        - task_key: bronze
+          depends_on:
+            - task_key: Generate
+          disabled: false
+          email_notifications: {}
+          notebook_task:
+            notebook_path: ../src/02_bronze.ipynb
+            source: WORKSPACE
+          run_if: ALL_SUCCESS
+          timeout_seconds: 0
+          webhook_notifications: {}
+        - task_key: silver
+          depends_on:
+            - task_key: bronze
+          disabled: false
+          email_notifications: {}
+          notebook_task:
+            notebook_path: ../src/03_silver.ipynb
+            source: WORKSPACE
+          run_if: ALL_SUCCESS
+          timeout_seconds: 0
+          webhook_notifications: {}
+        - task_key: gold
+          depends_on:
+            - task_key: silver
+          disabled: false
+          email_notifications: {}
+          notebook_task:
+            notebook_path: ../src/04_gold.ipynb
+            source: WORKSPACE
+          run_if: ALL_SUCCESS
+          timeout_seconds: 0
+          webhook_notifications: {}
+        - task_key: validation
+          depends_on:
+            - task_key: gold
+          disabled: false
+          email_notifications: {}
+          notebook_task:
+            notebook_path: ../src/05_validation.ipynb
+            source: WORKSPACE
+          run_if: ALL_SUCCESS
+          timeout_seconds: 0
+      email_notifications:
+        no_alert_for_skipped_runs: false
+      max_concurrent_runs: 1
+      performance_target: PERFORMANCE_OPTIMIZED
+      queue:
+        enabled: true
+      timeout_seconds: 0
+      webhook_notifications: {}

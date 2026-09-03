@@ -1,0 +1,12 @@
+bundle:
+  name: mining_telemetry_pipeline
+
+include:
+  - resources/*.yml
+
+targets:
+  dev:
+    mode: development
+    default: true
+    workspace:
+      host: https://dbc-e99085f0-570d.cloud.databricks.com
